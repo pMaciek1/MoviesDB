@@ -20,7 +20,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseYear" class="control-label"></label>
-                <input asp-for="ReleaseYear" class="form-control" />
+                <input asp-for="ReleaseYear" class="form-control" min="1900" step="1" max="2099"/>
                 <span asp-validation-for="ReleaseYear" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MoviesDB.Data;
+using Newtonsoft.Json;
 
 namespace MoviesDB.Controllers
 {
@@ -11,13 +13,20 @@ namespace MoviesDB.Controllers
         {
             _context = context;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.MoviesToWatch.ToListAsync());
+            ViewData["CurrentFilter"] = searchString;
+            var movies = from m in _context.MoviesToWatch
+                         select m;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                movies = movies.Where(s=>s.Title.Contains(searchString));
+            }
+            return View(await movies.ToListAsync());
         }
         public async Task<IActionResult> Details(int id)
         {
-            var movie = await _context.Movies.FindAsync(id);
+            var movie = await _context.MoviesToWatch.FindAsync(id);
             if (movie==null)
             {
                 return NotFound();
@@ -28,6 +37,7 @@ namespace MoviesDB.Controllers
         {
             return View();
         }
+        [HttpPost]
         public async Task<IActionResult> Create([Bind("Id,Title,ReleaseYear,Description")] MovieToWatch movie)
         {
             if(ModelState.IsValid)
@@ -82,6 +92,34 @@ namespace MoviesDB.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public async Task<IActionResult> Watched(int id)
+        {
+            var movie = await _context.MoviesToWatch.FindAsync(id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+            return View(movie);
+        }
+        [HttpPost, ActionName("Watched")]
+        public async Task<IActionResult> WatchedConfirmed(int id)
+        {
+            var movie = await _context.MoviesToWatch.FindAsync(id);
+            if (movie != null)
+            {
+                _context.MoviesToWatch.Remove(movie);
+                var movieWatched = new Movie()
+                {
+                    Id = (_context.Movies.Count())+1,
+                    Title= movie.Title,
+                    ReleaseYear= movie.ReleaseYear,
+                    Description= movie.Description,
+                };
+                _context.Movies.Add(movieWatched);
+            }
+            await _context.SaveChangesAsync();
 
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

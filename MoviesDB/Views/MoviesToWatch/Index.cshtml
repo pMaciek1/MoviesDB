@@ -1,15 +1,15 @@
-﻿@model IEnumerable<MoviesDB.Movie>
+﻿@model IEnumerable<MoviesDB.MovieToWatch>
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Movies</h1>
+<h1>Movies to watch</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-controller="Movies" asp-action="Index" method="get">
+<form asp-controller="MoviesToWatch" asp-action="Index" method="get">
     <p>
         Title: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
         <input type="submit" value="Filter" />
@@ -45,7 +45,8 @@
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> |
+                <a asp-action="Watched" asp-route-id="@item.Id">Watched</a>
             </td>
         </tr>
 }
