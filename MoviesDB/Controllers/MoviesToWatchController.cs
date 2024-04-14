@@ -40,7 +40,11 @@ namespace MoviesDB.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Id,Title,ReleaseYear,Description")] MovieToWatch movie)
         {
-            if(ModelState.IsValid)
+            if (movie.Description == "")
+            {
+                movie.Description = "No description.";
+            }
+            if (ModelState.IsValid)
             {
                 _context.Add(movie);
                 await _context.SaveChangesAsync();
@@ -63,6 +67,10 @@ namespace MoviesDB.Controllers
             if (id != movie.Id)
             {
                 return NotFound();
+            }
+            if (movie.Description == "")
+            {
+                movie.Description = "No description.";
             }
             if (ModelState.IsValid)
             {

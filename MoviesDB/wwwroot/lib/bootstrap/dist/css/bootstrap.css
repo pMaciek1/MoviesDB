@@ -70,6 +70,8 @@
   }
 }
 
+
+
 body {
   margin: 0;
   font-family: var(--bs-body-font-family);
@@ -971,10 +973,10 @@ progress {
     width: 75%;
   }
 
-  .col-sm-10 {
-    flex: 0 0 auto;
-    width: 83.33333333%;
-  }
+    .col-sm-10 {
+        flex: 0 0 auto;
+        width: 83.33333333%;
+    }
 
   .col-sm-11 {
     flex: 0 0 auto;
@@ -3962,6 +3964,7 @@ textarea.form-control-lg {
 }
 
 .navbar {
+  background-color: rgba(255,0,0,0.5);
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -11216,6 +11219,7 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
