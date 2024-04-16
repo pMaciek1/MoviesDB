@@ -14,8 +14,8 @@ namespace MoviesDB
         {
             get
             {
-                if (this.Description?.Length > 40)
-                    return this.Description.Substring(0, 40) + "...";
+                if (this.Description?.Length > 50)
+                    return this.Description.Substring(0, 50) + "...";
                 else
                     return this.Description;
             }

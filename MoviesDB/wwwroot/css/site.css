@@ -37,3 +37,20 @@ html {
     opacity: .25;
     background-size: cover;
 }
+.table{
+    border: 1px solid white;
+    opacity:0.90;
+}
+    .table thead th {
+        border-width: 2px!important;
+        border-color: white!important;
+        border-style:solid!important;
+        background-color:dimgrey;
+    }
+    .table td {
+        border-width: 2px !important;
+        border-color: white !important;
+        border-style: solid !important;
+        text-align: center;
+        vertical-align: middle;
+    }
