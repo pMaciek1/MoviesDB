@@ -24,15 +24,5 @@ namespace MoviesDB.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
-        public int MoviesCount()
-        {
-            var count = _context.Movies.Count(t => t.Id == '1');
-            return count;
-        }
-        public int MoviesToWatchCount()
-        {
-            var count = _context.MoviesToWatch.Count(t => t.Id == '1');
-            return count;
-        }
     }
 }
