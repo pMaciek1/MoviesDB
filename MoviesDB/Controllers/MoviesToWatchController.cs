@@ -20,7 +20,7 @@ namespace MoviesDB.Controllers
                          select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s=>s.Title.Contains(searchString));
+                movies = movies.Where(s=>s.Title.ToLower().Contains(searchString.ToLower()));
             }
             return View(await movies.ToListAsync());
         }
@@ -40,7 +40,7 @@ namespace MoviesDB.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("Id,Title,ReleaseYear,Description")] MovieToWatch movie)
         {
-            if (movie.Description == "")
+            if (movie.Description == null)
             {
                 movie.Description = "No description.";
             }
@@ -68,7 +68,7 @@ namespace MoviesDB.Controllers
             {
                 return NotFound();
             }
-            if (movie.Description == "")
+            if (movie.Description == null)
             {
                 movie.Description = "No description.";
             }

@@ -27,7 +27,7 @@ namespace MoviesDB.Controllers
                          select m;
             if (!String.IsNullOrEmpty(searchString))
             {
-                movies = movies.Where(s => s.Title.Contains(searchString));
+                movies = movies.Where(s => s.Title.ToLower().Contains(searchString.ToLower()));
             }
             return View(await movies.ToListAsync());
         }
@@ -97,7 +97,7 @@ namespace MoviesDB.Controllers
             {
                 return NotFound();
             }
-            if(movie.Description == null)
+            if (movie.Description == null)
             {
                 movie.Description = "No description.";
             }
@@ -160,6 +160,16 @@ namespace MoviesDB.Controllers
         private bool MovieExists(int id)
         {
             return _context.Movies.Any(e => e.Id == id);
+        }
+        public int MoviesCount()
+        {
+            var count = _context.Movies.Count(t => t.Id == '1');
+            return count;
+        }
+        public int MoviesToWatchCount()
+        {
+            var count = _context.MoviesToWatch.Count(t => t.Id == '1');
+            return count;
         }
     }
 }

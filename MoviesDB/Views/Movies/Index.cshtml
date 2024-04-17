@@ -9,7 +9,7 @@
 <p>
     <a class="btn btn-primary" asp-action="Create">Create New</a>
 </p>
-<form asp-controller="Movies" asp-action="Index" method="get">
+<form asp-controller="Movies" asp-action="Index" method="get" autocomplete="off">
     <p>
         Title: <input type="text" name="searchString" value="@ViewData["CurrentFilter"]" />
         <input type="submit" value="Filter" />
@@ -22,12 +22,12 @@
                 @Html.DisplayNameFor(model => model.Title)
             </th>
             <th style="width: 100px">
-                Relase Year
+                Release Year
             </th>
-            <th style="width: 500px">
+            <th style="width: 430px">
                 @Html.DisplayNameFor(model => model.Description)
             </th>
-            <th style="width: 330px"></th>
+            <th style="width: 400px"></th>
         </tr>
     </thead>
     <tbody>

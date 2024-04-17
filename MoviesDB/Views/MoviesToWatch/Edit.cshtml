@@ -6,11 +6,10 @@
 
 <h1>Edit</h1>
 
-<h4>Movie</h4>
 <hr />
-<div class="row">
+<div class="row" style="border: 3px solid #696969; background-color:#999999; opacity:0.9; margin-inline: auto;">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        <form asp-action="Edit" autocomplete="off">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Id" />
             <div class="form-group">
@@ -19,7 +18,7 @@
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ReleaseYear" class="control-label"></label>
+                <label>Release year</label>
                 <input asp-for="ReleaseYear" class="form-control" min="1900" step="1" max="2099" />
                 <span asp-validation-for="ReleaseYear" class="text-danger"></span>
             </div>
@@ -28,17 +27,24 @@
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+            <br />
+            <div class="form-group" style="float:left">
+                <label class="btn btn-success">
+                    <input type="submit" value="" style="display:none" />
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z" />
+                    </svg>
+                    Edit
+                </label>
             </div>
         </form>
+        <div style="margin-left:25%;">
+            <a class="btn btn-outline-danger" asp-action="Index">Back to the list</a>
+        </div>
+        <br />
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
